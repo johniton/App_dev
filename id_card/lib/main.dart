@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -7,7 +6,14 @@ void main() {
   ));
 }
 
-class NinjaCard extends StatelessWidget {
+class NinjaCard extends StatefulWidget {
+  @override
+  State<NinjaCard> createState() => _NinjaCardState();
+}
+
+class _NinjaCardState extends State<NinjaCard> {
+  int ninjaLevel = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +68,7 @@ class NinjaCard extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  '8',
+                  '$ninjaLevel',
                   style: TextStyle(
                       color: Colors.amberAccent[200],
                       letterSpacing: 2.0,
@@ -73,7 +79,11 @@ class NinjaCard extends StatelessWidget {
                   width: 10.0,
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      ninjaLevel += 1;
+                    });
+                  },
                   child: Icon(Icons.add),
                 )
               ],
