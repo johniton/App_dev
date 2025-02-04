@@ -1,38 +1,41 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import '../services/worldTime.dart';
 
 class Loading extends StatefulWidget {
+  const Loading({super.key});
+
   @override
   State<Loading> createState() => _LoadingState();
 }
 
 class _LoadingState extends State<Loading> {
   int counter = 0;
-  void getData() async {
-    //Response response =
-    //    await get('https://jsonplaceholder.typicode.com/todos/1');
-    final url = Uri.parse('https://jsonplaceholder.typicode.com/todos/1');
-    final response = await http.get(url);
-    Map data = jsonDecode(response.body);
-    print(data);
-    print(data['title']);
-    print(data['id']);
+  String time = 'loading';
+
+  void setUpWorldTime() async {
+    Worldtime instance =
+        Worldtime(location: 'Kolkata', continent: 'Asia', flag: 'India.png');
+    var vol = await instance.getTime();
+    setState(() {
+      time = vol;
+    });
   }
 
   @override
   void initState() {
     super.initState();
     print('Initstate function ran');
-    getData();
     print('I didnt wait for the function to get over!!');
+    setUpWorldTime();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Text('Loading'),
+      body: Padding(
+        padding: EdgeInsets.all(50.0),
+        child: Text(time),
+      ),
     );
   }
 }
