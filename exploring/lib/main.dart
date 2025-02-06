@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:exploring/Page2.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -20,6 +21,12 @@ class _MyAppState extends State<MyApp> {
       body: Center(
         child: Column(
           children: [
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Page2()));
+                },
+                child: Text('Next Page')),
             MyContainer(
               c: Colors.red,
               name: 'john',
@@ -58,11 +65,11 @@ class _MyContainerState extends State<MyContainer> {
     return Container(
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
-      child: Text(widget.name),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: widget.c,
           border: Border.all()),
+      child: Text(widget.name),
     );
   }
 }
