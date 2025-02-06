@@ -8,64 +8,75 @@ class Page2 extends StatefulWidget {
 }
 
 class _Page2State extends State<Page2> {
-  List<Map> person = [
-    {'name': 'john', 'roll': '2'},
-    {'name': 'gaonker', 'roll': '8'}
+  List<Map> people = [
+    {'name': 'john', 'roll': '28'},
+    {'name': 'harsh', 'roll': '24'},
+    {'name': 'gaurav', 'roll': '10'}
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Dynamic Cards'),
+      ),
       body: Column(
         children: [
           ElevatedButton(
               onPressed: () {
                 setState(() {
-                  person.add({'name': 'gaurav', 'roll': '5'});
+                  people.add({'name': 'Random', 'roll': '000'});
                 });
               },
               child: Icon(Icons.add)),
-          Card(name: 'john', roll: '28'),
-          Card(name: 'harsh', roll: '24'),
-          Card(name: 'gaurav', roll: '10'),
+          Expanded(
+              child: ListView.builder(
+            physics: BouncingScrollPhysics(),
+            itemCount: people.length,
+            itemBuilder: (context, index) {
+              return PersonCard(
+                  name: people[index]['name']!, roll: people[index]['roll']!);
+            },
+          ))
         ],
       ),
     );
   }
 }
 
-class Card extends StatefulWidget {
+class PersonCard extends StatefulWidget {
   String name;
   String roll;
-  Card({super.key, this.name = "random", this.roll = '000'});
+  PersonCard({super.key, this.name = "random", this.roll = '000'});
 
   @override
-  State<Card> createState() => _CardState();
+  State<PersonCard> createState() => _PersonCardState();
 }
 
-class _CardState extends State<Card> {
+class _PersonCardState extends State<PersonCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        margin: EdgeInsets.all(6),
-        decoration: BoxDecoration(
-            color: Colors.cyan, borderRadius: BorderRadius.circular(10)),
-        child: Row(children: [
-          Column(
-            children: [
-              Text(
-                widget.name,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
-              Text(
-                widget.roll,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-              )
-            ],
-          ),
-          Spacer(),
-          Icon(Icons.info)
-        ]));
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+      margin: EdgeInsets.all(6),
+      decoration: BoxDecoration(
+          color: Colors.cyan, borderRadius: BorderRadius.circular(10)),
+      child: Row(children: [
+        Column(
+          children: [
+            Text(
+              widget.name,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            Text(
+              widget.roll,
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+            )
+          ],
+        ),
+        Spacer(),
+        Icon(Icons.info),
+      ]),
+    );
   }
 }
 //
