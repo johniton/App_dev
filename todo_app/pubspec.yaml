@@ -31,6 +31,8 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
+  fluttertoast: ^8.2.11
+  toastification: ^2.3.0
   
 
 dev_dependencies:

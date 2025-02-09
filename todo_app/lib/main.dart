@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'todo.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,11 +14,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  List<Map> task = [
-    {'title': 'task1', 'des': 'description'},
-    {'title': 'task2', 'des': 'test work'},
-    {'title': 'task3', 'des': 'bath'},
-  ];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -34,12 +31,79 @@ class FlutterMain extends StatefulWidget {
 }
 
 class _FlutterMainState extends State<FlutterMain> {
-  List<Map> task = [
-    {'title': 'task1', 'des': 'description'},
-    {'title': 'task2', 'des': 'test work'},
-    {'title': 'task3', 'des': 'bath'},
-  ];
-  void addCard(String task) {}
+  List todolist = [];
+
+// Toastifation
+  // void showToast(String message) {
+  //   Fluttertoast.showToast(
+  //     msg: message,
+  //     toastLength: Toast.LENGTH_SHORT,
+  //     gravity: ToastGravity.BOTTOM, // You can change this to CENTER or TOP
+  //     backgroundColor: Colors.grey[800],
+  //     textColor: Colors.white,
+  //     fontSize: 16.0,
+  //   );
+  // }
+  // void showSnackbar(String message) {
+  //   ScaffoldMessenger.of(context).showSnackBar(
+  //     SnackBar(
+  //       content: Text(message),
+  //       duration: Duration(seconds: 2),
+  //     ),
+  //   );
+  // }
+  void showSnackbar(String message,
+      {Duration duration = const Duration(seconds: 2),
+      Color backgroundColor = const Color.fromARGB(255, 184, 23, 23)}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          style: TextStyle(color: Colors.white, fontSize: 16),
+        ),
+        duration: duration,
+        backgroundColor: backgroundColor,
+      ),
+    );
+  }
+
+  void addCard(String task) {
+    setState(() {
+      todolist.add(task);
+    });
+  }
+
+  void showAddTaskDialog() {
+    TextEditingController taskController = TextEditingController();
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Add Task'),
+            content: TextField(
+              controller: taskController,
+              decoration: InputDecoration(hintText: 'Enter a task'),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  if (taskController.text.isNotEmpty) {
+                    addCard(taskController.text);
+                    Navigator.pop(context);
+
+                    Future.delayed(Duration(milliseconds: 200), () {
+                      showSnackbar('Task Added');
+                    });
+                    taskController.dispose();
+                  }
+                },
+                child: Text('Add'),
+              )
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,78 +125,30 @@ class _FlutterMainState extends State<FlutterMain> {
           Text(
             'Today',
             style: TextStyle(
-                fontSize: 35, color: const Color.fromARGB(255, 255, 255, 255)),
+                color: Colors.white, fontWeight: FontWeight.bold, fontSize: 35),
           ),
           SizedBox(
             height: 20.0,
           ),
-          // TodoCard(
-          //   text: 'test work',
-          // ),
-          // TodoCard(text: 'bath'),
-          // FloatingActionButton(onPressed: () {}, child: Icon(Icons.add))
+          Expanded(
+              child: ListView.builder(
+                  itemCount: todolist.length,
+                  itemBuilder: (context, index) {
+                    return TodoCard(
+                        text: todolist[index],
+                        onDelete: () {
+                          setState(() {
+                            todolist.removeAt(index);
+                            showSnackbar('Task Deleted');
+                          });
+                        });
+                  }))
         ],
       ),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              TodoCard(
-                text: 'NEW',
-              );
-            });
-          },
-          child: Icon(Icons.add)),
-    );
-  }
-}
-
-class TodoCard extends StatefulWidget {
-  final String text;
-  const TodoCard({super.key, required this.text});
-
-  @override
-  State<TodoCard> createState() => _TodoCardState();
-}
-
-class _TodoCardState extends State<TodoCard> {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(10.0),
-      decoration: BoxDecoration(
-          color: Colors.amber, borderRadius: BorderRadius.circular(20)),
-      width: MediaQuery.of(context).size.width,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsets.all(10),
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0),
-                    child: Text(
-                      widget.text,
-                      style: TextStyle(fontSize: 35),
-                    ),
-                  ),
-                ),
-              ]),
-          Column(
-            children: [
-              IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.delete_forever_outlined,
-                    color: Colors.red,
-                  )),
-              IconButton(onPressed: () {}, icon: Icon(Icons.edit_outlined))
-            ],
-          ),
-        ],
+        onPressed: showAddTaskDialog,
+        child: Icon(Icons.add),
+        backgroundColor: Colors.blue,
       ),
     );
   }
