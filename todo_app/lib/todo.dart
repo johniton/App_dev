@@ -44,7 +44,12 @@ class TodoCard extends StatelessWidget {
                     Icons.delete_forever_outlined,
                     color: Colors.red,
                   )),
-              IconButton(onPressed: onEdit, icon: Icon(Icons.edit_outlined))
+              IconButton(
+                  onPressed: onEdit,
+                  icon: Icon(
+                    Icons.edit_outlined,
+                    color: Colors.blue[800],
+                  ))
             ],
           ),
         ],

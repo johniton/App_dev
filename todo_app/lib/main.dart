@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'todo.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -31,7 +26,7 @@ class FlutterMain extends StatefulWidget {
 }
 
 class _FlutterMainState extends State<FlutterMain> {
-  List todolist = [];
+  List<String> todolist = [];
 
 // Toastifation
   // void showToast(String message) {
@@ -52,6 +47,8 @@ class _FlutterMainState extends State<FlutterMain> {
   //     ),
   //   );
   // }
+
+// To display a message
   void showSnackbar(String message,
       {Duration duration = const Duration(seconds: 2),
       Color backgroundColor = const Color.fromARGB(255, 184, 23, 23)}) {
@@ -67,12 +64,14 @@ class _FlutterMainState extends State<FlutterMain> {
     );
   }
 
+// To add a task
   void addCard(String task) {
     setState(() {
       todolist.add(task);
     });
   }
 
+// prompt pop up
   void showAddTaskDialog() {
     TextEditingController taskController = TextEditingController();
     showDialog(
@@ -165,22 +164,36 @@ class _FlutterMainState extends State<FlutterMain> {
             height: 20.0,
           ),
           Expanded(
-              child: ListView.builder(
-                  itemCount: todolist.length,
-                  itemBuilder: (context, index) {
-                    return TodoCard(
-                      text: todolist[index],
-                      onDelete: () {
-                        setState(() {
-                          todolist.removeAt(index);
-                          showSnackbar('Task Deleted');
-                        });
-                      },
-                      onEdit: () {
-                        onEditTask(index);
-                      },
-                    );
-                  }))
+              child: todolist.isEmpty
+                  ? const Center(
+                      child: Text(
+                        'NO TASKS ADDED',
+                        style: TextStyle(
+                            color: Color.fromARGB(255, 255, 191, 0),
+                            fontSize: 35.0,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  : ListView.builder(
+                      physics: BouncingScrollPhysics(),
+
+                      // physics: BouncingScrollPhysics(),
+
+                      itemCount: todolist.length,
+                      itemBuilder: (context, index) {
+                        return TodoCard(
+                          text: todolist[index],
+                          onDelete: () {
+                            setState(() {
+                              todolist.removeAt(index);
+                              showSnackbar('Task Deleted');
+                            });
+                          },
+                          onEdit: () {
+                            onEditTask(index);
+                          },
+                        );
+                      }))
         ],
       ),
       floatingActionButton: FloatingActionButton(
