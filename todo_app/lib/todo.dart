@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 class TodoCard extends StatelessWidget {
   final String text;
   final VoidCallback onDelete;
-
-  const TodoCard({super.key, required this.text, required this.onDelete});
+  final VoidCallback onEdit;
+  const TodoCard(
+      {super.key,
+      required this.text,
+      required this.onDelete,
+      required this.onEdit});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +44,7 @@ class TodoCard extends StatelessWidget {
                     Icons.delete_forever_outlined,
                     color: Colors.red,
                   )),
-              IconButton(onPressed: () {}, icon: Icon(Icons.edit_outlined))
+              IconButton(onPressed: onEdit, icon: Icon(Icons.edit_outlined))
             ],
           ),
         ],

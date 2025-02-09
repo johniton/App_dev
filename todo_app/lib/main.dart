@@ -104,6 +104,40 @@ class _FlutterMainState extends State<FlutterMain> {
         });
   }
 
+  void onEditTask(int index) {
+    TextEditingController taskController =
+        TextEditingController(text: todolist[index]);
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('Edit Task'),
+            content: TextField(
+              controller: taskController,
+              decoration: InputDecoration(hintText: 'Edit the Task'),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  if (taskController.text.isNotEmpty) {
+                    setState(() {
+                      todolist[index] = taskController.text;
+                    });
+                    Navigator.pop(context);
+
+                    Future.delayed(Duration(milliseconds: 200), () {
+                      showSnackbar('Task Edited');
+                    });
+                    taskController.dispose();
+                  }
+                },
+                child: Text('SAVE'),
+              )
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -135,20 +169,24 @@ class _FlutterMainState extends State<FlutterMain> {
                   itemCount: todolist.length,
                   itemBuilder: (context, index) {
                     return TodoCard(
-                        text: todolist[index],
-                        onDelete: () {
-                          setState(() {
-                            todolist.removeAt(index);
-                            showSnackbar('Task Deleted');
-                          });
+                      text: todolist[index],
+                      onDelete: () {
+                        setState(() {
+                          todolist.removeAt(index);
+                          showSnackbar('Task Deleted');
                         });
+                      },
+                      onEdit: () {
+                        onEditTask(index);
+                      },
+                    );
                   }))
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: showAddTaskDialog,
-        child: Icon(Icons.add),
         backgroundColor: Colors.blue,
+        child: Icon(Icons.add),
       ),
     );
   }
