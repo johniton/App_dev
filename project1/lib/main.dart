@@ -33,7 +33,8 @@ class _MyAppState extends State<MyApp> {
                       const Padding(padding: EdgeInsets.all(8.0)),
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              onPrimary: Colors.white, primary: Colors.orange),
+                              foregroundColor: Colors.white,
+                              backgroundColor: Colors.orange),
                           onPressed: () {
                             setState(() {
                               buttonName = 'Clicked';
@@ -43,7 +44,8 @@ class _MyAppState extends State<MyApp> {
                       const Padding(padding: EdgeInsets.all(8.0)),
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              onPrimary: Colors.white, primary: Colors.black87),
+                              backgroundColor: Colors.white,
+                              foregroundColor: Colors.black87),
                           onPressed: () {
                             setState(() {
                               buttonName = 'Clicked';
@@ -53,11 +55,11 @@ class _MyAppState extends State<MyApp> {
                     ],
                   ),
                 )
-              : SizedBox(),
+              : const SizedBox(),
         ),
         bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Color.fromARGB(255, 120, 81, 194),
-          selectedItemColor: Color.fromARGB(255, 255, 17, 0),
+          backgroundColor: const Color.fromARGB(255, 120, 81, 194),
+          selectedItemColor: const Color.fromARGB(255, 255, 17, 0),
           items: const [
             BottomNavigationBarItem(label: 'Home', icon: Icon(Icons.home)),
             BottomNavigationBarItem(
