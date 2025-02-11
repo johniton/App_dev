@@ -25,7 +25,7 @@ class homeScreen extends StatefulWidget {
 }
 
 class _homeScreenState extends State<homeScreen> {
-  String loginId = 'NO ID ENTERED';
+  String loginId = 'Enter ID';
   @override
   Future<void> dialogbox(context) async {
     TextEditingController taskController = TextEditingController();
@@ -74,16 +74,15 @@ class _homeScreenState extends State<homeScreen> {
         height: double.infinity,
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage('lib/assets/Screenshot_20250210_215021.png'),
-                fit: BoxFit.cover)),
+                image: AssetImage('lib/assets/login.png'), fit: BoxFit.cover)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              // color: Colors.amberAccent,
               decoration: BoxDecoration(
                   border: Border.all(
-                      color: const Color.fromARGB(128, 9, 9, 9), width: 4.0)),
+                      color: const Color.fromARGB(128, 149, 234, 45),
+                      width: 4.0)),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -93,7 +92,9 @@ class _homeScreenState extends State<homeScreen> {
                       alignment: Alignment.center,
                       child: Text(
                         loginId,
-                        style: TextStyle(fontSize: 30, color: Colors.white),
+                        style: TextStyle(
+                            fontSize: 30,
+                            color: const Color.fromARGB(255, 0, 0, 0)),
                       ),
                     ),
                   ),
@@ -128,7 +129,7 @@ class _homeScreenState extends State<homeScreen> {
                   style: TextButton.styleFrom(
                       foregroundColor: Colors.white, // Text color
                       backgroundColor: Colors.blue, // Button background color
-                      padding: EdgeInsets.all(16), // Optional padding
+                      padding: EdgeInsets.all(16),
                       shape: RoundedRectangleBorder(
                         borderRadius:
                             BorderRadius.circular(10), // Rounded corners
