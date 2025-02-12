@@ -98,33 +98,6 @@ class FlutterMain extends StatelessWidget {
                 ),
               ),
             )
-            // Container(
-            //   width: 500,
-            //   height: 40,
-            //   decoration: BoxDecoration(
-            //       color: Colors.amber, borderRadius: BorderRadius.circular(30)),
-            //   child: TextButton.icon(onPressed: () {}, label: Text('google')),
-            // ),
-            // SizedBox(
-            //   height: 20,
-            // ),
-            // Container(
-            //   width: 500,
-            //   height: 40,
-            //   decoration: BoxDecoration(
-            //       color: Colors.amber, borderRadius: BorderRadius.circular(30)),
-            //   child: TextButton.icon(onPressed: () {}, label: Text('Facebook')),
-            // ),
-            // SizedBox(
-            //   height: 20,
-            // ),
-            // Container(
-            //   width: 500,
-            //   height: 40,
-            //   decoration: BoxDecoration(
-            //       color: Colors.amber, borderRadius: BorderRadius.circular(30)),
-            //   child: TextButton.icon(onPressed: () {}, label: Text('sign up Github')),
-            // ),
           ],
         ),
       ),
