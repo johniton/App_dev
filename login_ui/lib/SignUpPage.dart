@@ -26,7 +26,8 @@ class FlutterMain extends StatelessWidget {
               width: 500,
               height: 40,
               decoration: BoxDecoration(
-                  color: Colors.amber, borderRadius: BorderRadius.circular(30)),
+                  color: const Color.fromARGB(255, 255, 252, 244),
+                  borderRadius: BorderRadius.circular(30)),
               child: TextField(
                 decoration: InputDecoration(
                     hintText: 'Email',
@@ -45,13 +46,56 @@ class FlutterMain extends StatelessWidget {
               width: 500,
               height: 40,
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
                 color: Colors.amber,
               ),
-              child: SvgPicture.asset(
-                'lib/assets/google.svg',
-                width: 10,
-                height: 10,
-                semanticsLabel: 'Google',
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 244, 218, 140)),
+                onPressed: () {},
+                child: SvgPicture.asset(
+                  'lib/assets/google.svg',
+                  semanticsLabel: 'Google',
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              width: 500,
+              height: 40,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                color: Colors.amber,
+              ),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 244, 218, 140)),
+                onPressed: () {},
+                child: SvgPicture.asset(
+                  'lib/assets/facebook.svg',
+                  semanticsLabel: 'Facebook',
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              width: 500,
+              height: 40,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 244, 218, 140)),
+                onPressed: () {},
+                child: SvgPicture.asset(
+                  'lib/assets/github.svg',
+                  semanticsLabel: 'Github',
+                ),
               ),
             )
             // Container(

@@ -19,12 +19,21 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  Color C = Colors.white;
+  Color T = Colors.black;
+  String lemonpie = 'lib/assets/lemonPieNew.png';
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: C,
       body: SafeArea(
         child: SizedBox(
           width: double.infinity,
@@ -40,16 +49,36 @@ class HomePage extends StatelessWidget {
                           height: 250,
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                  image:
-                                      AssetImage('lib/assets/lemonPie.png')))),
+                                  image: AssetImage(lemonpie)))),
                       Text(
                         'Welcome To LemonPie',
                         style: TextStyle(
-                            color: Colors.black,
+                            color: T,
                             fontSize: 30,
                             fontWeight: FontWeight.bold),
                       ),
-                      Text('Keep your data Safe'),
+                      Text(
+                        'Keep your data Safe',
+                        style: TextStyle(color: T),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextButton.icon(
+                          onPressed: () {
+                            setState(() {
+                              if (C == Colors.black) {
+                                lemonpie = 'lib/assets/lemonPieNew.png';
+                                C = Colors.white;
+                                T = Colors.black;
+                              } else {
+                                C = Colors.black;
+                                T = Colors.white;
+                                lemonpie = 'lib/assets/darkmodelemonPie.png';
+                              }
+                            });
+                          },
+                          label: Icon(Icons.sunny)),
                       SizedBox(
                         height: 200,
                       ),
@@ -116,7 +145,7 @@ class HomePage extends StatelessWidget {
                                     style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
-                                        color: Colors.black),
+                                        color: T),
                                   )),
                             ),
                             SizedBox(
@@ -139,7 +168,10 @@ class HomePage extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('Dont Have an account?'),
+                                Text(
+                                  'Dont Have an account?',
+                                  style: TextStyle(color: T),
+                                ),
                                 TextButton.icon(
                                     onPressed: () {
                                       Navigator.push(
