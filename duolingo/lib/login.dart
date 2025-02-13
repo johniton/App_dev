@@ -78,13 +78,15 @@ class _HomePageState extends State<HomePage> {
                                   if (Screencolor == Colors.black) {
                                     Screencolor = Colors.white;
                                     T = Colors.black;
+                                    I = Icon(Icons.nightlight);
                                   } else {
                                     Screencolor = Colors.black;
                                     T = Colors.white;
+                                    I = Icon(Icons.sunny);
                                   }
                                 });
                               },
-                              label: Icon(Icons.sunny),
+                              label: I,
                             ),
                             SizedBox(height: 200),
                             Column(
