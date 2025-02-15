@@ -26,6 +26,8 @@ class _HomeState extends State<Home> {
 
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Color.fromARGB(255, 50, 25, 25),
+
         appBar: AppBar(
           leading: IconButton(
             iconSize: 35,
@@ -39,7 +41,6 @@ class _HomeState extends State<Home> {
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Container(
-            color: Color.fromARGB(255, 50, 25, 25),
             width: double.infinity,
             child: Column(
               children: [
@@ -75,11 +76,17 @@ class _HomeState extends State<Home> {
                   padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Row(
                     children: [
-                      imageAligner(context, 'lib/assets/bed.jpg', () => bed()),
+                      imageAligner(
+                        context,
+                        'lib/assets/bed.jpg',
+                        () => bed(),
+                        'bed',
+                      ),
                       imageAligner(
                         context,
                         'lib/assets/outdoor.jpg',
                         () => outdoor(),
+                        'outdoor furniture',
                       ),
                     ],
                   ),
@@ -93,11 +100,13 @@ class _HomeState extends State<Home> {
                         context,
                         'lib/assets/diningTable.jpg',
                         () => diningTable(),
+                        'Table',
                       ),
                       imageAligner(
                         context,
                         'lib/assets/sofa.jpg',
                         () => sofa(),
+                        'Sofa',
                       ),
                     ],
                   ),
@@ -110,7 +119,12 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Flexible imageAligner(BuildContext context, String img, Function redirect) {
+  Flexible imageAligner(
+    BuildContext context,
+    String img,
+    Function redirect,
+    String name,
+  ) {
     return Flexible(
       child: GestureDetector(
         onTap:
@@ -118,7 +132,12 @@ class _HomeState extends State<Home> {
               context,
               MaterialPageRoute(builder: (context) => redirect()),
             ),
-        child: containerCreater(img),
+        child: Column(
+          children: [
+            containerCreater(img),
+            Text(name, style: TextStyle(color: Colors.white)),
+          ],
+        ),
       ),
     );
   }

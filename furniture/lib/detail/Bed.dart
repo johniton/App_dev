@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'addItem.dart';
 
 class bed extends StatelessWidget {
   const bed({super.key});
@@ -35,19 +36,6 @@ class bed extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  // ✅ Now itemTile function is inside the class
-  Widget itemTile(String title, String image, String price) {
-    return Card(
-      margin: EdgeInsets.all(15),
-      child: ListTile(
-        leading: Image.asset(image, width: 80, fit: BoxFit.cover),
-        title: Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
-        subtitle: Text(price),
-        trailing: Icon(Icons.shopping_cart),
       ),
     );
   }

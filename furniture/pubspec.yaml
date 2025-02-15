@@ -67,6 +67,15 @@ flutter:
     - lib/assets/bed1.jpg
     - lib/assets/bed2.jpg
     - lib/assets/bed3.jpg
+    - lib/assets/chaiseLounges.png
+    - lib/assets/hammocks.png
+    - lib/assets/outdoorOttomans.png
+    - lib/assets/singlePedestal.png
+    - lib/assets/rectangular.png
+    - lib/assets/doublePedestal.png
+    - lib/assets/tuxedo.png
+    - lib/assets/chesterField.png
+    - lib/assets/camelBack.png
 
   #   - images/a_dot_ham.jpeg
 

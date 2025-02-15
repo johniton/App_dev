@@ -17,7 +17,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 1500), () {
+    Future.delayed(Duration(milliseconds: 900), () {
       setState(() {
         bkgColor = Color.fromARGB(255, 75, 41, 41);
       });
