@@ -21,6 +21,8 @@ class _MyAppState extends State<MyApp> {
       setState(() {
         bkgColor = Color.fromARGB(255, 75, 41, 41);
       });
+
+      // })
       Future.delayed(Duration(milliseconds: 3500), () {
         Navigator.push(
           context,

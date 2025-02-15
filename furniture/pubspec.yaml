@@ -76,6 +76,12 @@ flutter:
     - lib/assets/tuxedo.png
     - lib/assets/chesterField.png
     - lib/assets/camelBack.png
+    - lib/assets/lightmode.png
+    - lib/assets/darkmode.jpg
+    - lib/assets/bookcase.png
+    - lib/assets/cradle.png
+    - lib/assets/cupboard.png
+    - lib/assets/desk2.png
 
   #   - images/a_dot_ham.jpeg
 
