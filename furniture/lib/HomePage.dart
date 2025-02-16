@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:furniture/detail/demo.dart';
 import 'package:furniture/helpPage.dart';
 import 'package:toastification/toastification.dart';
 import 'detail/Bed.dart';
@@ -171,8 +172,8 @@ class _HomeState extends State<Home> {
                         context,
                         'lib/assets/desk2.png',
                         'lib/assets/cupboard.png',
-                        () {},
-                        () {},
+                        () => Demo(),
+                        () => Demo(),
                         'Desks',
                         'Cupboards',
                       ),
@@ -180,8 +181,8 @@ class _HomeState extends State<Home> {
                         context,
                         'lib/assets/cradle.png',
                         'lib/assets/bookcase.png',
-                        () {},
-                        () {},
+                        () => Demo(),
+                        () => Demo(),
                         'Cradle',
                         'BookCase',
                       ),
