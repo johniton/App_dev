@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:furniture/helpPage.dart';
+import 'package:toastification/toastification.dart';
 import 'detail/Bed.dart';
 import 'detail/Dining.dart';
 import 'detail/Outdoor.dart';
@@ -13,7 +15,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  @override
   TextEditingController search = TextEditingController();
   @override
   void dispose() {
@@ -126,6 +127,17 @@ class _HomeState extends State<Home> {
                     SneekPeek('lib/assets/diningTable.jpg'),
                     SneekPeek('lib/assets/singlePedestal.png'),
                     SneekPeek('lib/assets/chaiseLounges.png'),
+                    SneekPeek('lib/assets/camelBack.png'),
+                    SneekPeek('lib/assets/camelBack.png'),
+                    SneekPeek('lib/assets/camelBack.png'),
+                    SneekPeek('lib/assets/camelBack.png'),
+                    SneekPeek('lib/assets/camelBack.png'),
+                    SneekPeek('lib/assets/camelBack.png'),
+                    SneekPeek('lib/assets/camelBack.png'),
+                    SneekPeek('lib/assets/camelBack.png'),
+                    SneekPeek('lib/assets/camelBack.png'),
+                    SneekPeek('lib/assets/camelBack.png'),
+                    SneekPeek('lib/assets/camelBack.png'),
                     SneekPeek('lib/assets/camelBack.png'),
                   ],
                 ),
@@ -261,19 +273,38 @@ Container containerCreater(String img) {
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({super.key});
 
+  void showToast(BuildContext context, String message) {
+    toastification.show(
+      context: context,
+      title: Text(message),
+      autoCloseDuration: Duration(seconds: 3), // Disappears after 3 seconds
+      backgroundColor: Colors.black87,
+      foregroundColor: Colors.white,
+      alignment: Alignment.bottomCenter, // Toast position
+      type:
+          ToastificationType.info, // You can use success, warning, error, etc.
+      showProgressBar: true, // Shows a progress bar while the toast is active
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      surfaceTintColor: Colors.black,
       shape: UnderlineInputBorder(),
       child: Column(
         children: [
           ListTile(
             leading: Icon(Icons.home_outlined),
+            iconColor: Colors.grey[900],
             title: Text('Home'),
-            onTap: () {},
+            onTap: () {
+              showToast(context, 'You are already in Home');
+            },
           ),
           ListTile(
-            leading: const Icon(Icons.home_outlined),
+            leading: const Icon(Icons.volunteer_activism),
+            iconColor: Colors.amber[600],
             title: Text('Most visited'),
             onTap: () {
               Navigator.push(
@@ -283,7 +314,8 @@ class NavigationDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.home_outlined),
+            leading: const Icon(Icons.favorite),
+            iconColor: Colors.red[900],
             title: Text('FF Choice'),
             onTap: () {
               Navigator.push(
@@ -293,9 +325,16 @@ class NavigationDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.home_outlined),
+            leading: const Icon(Icons.help),
+            iconColor: Colors.blue[900],
             title: Text('Help'),
-            onTap: () {},
+            onTap: () {
+              showToast(context, 'We are here to help!');
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Help()),
+              );
+            },
           ),
         ],
       ),

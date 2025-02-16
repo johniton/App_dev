@@ -56,7 +56,6 @@ class Help extends StatelessWidget {
             ),
             SizedBox(height: 150),
             Row(
-              // spacing: 15,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 cardCreator(
