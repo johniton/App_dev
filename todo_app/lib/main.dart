@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'todo.dart';
 
 void main() {
@@ -56,7 +55,7 @@ class _FlutterMainState extends State<FlutterMain> {
       SnackBar(
         content: Text(
           message,
-          style: TextStyle(color: Colors.white, fontSize: 16),
+          style: TextStyle(color: Colors.white, fontSize: 20),
         ),
         duration: duration,
         backgroundColor: backgroundColor,
