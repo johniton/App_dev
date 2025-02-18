@@ -63,7 +63,7 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
-      - lib/assets/lemonPie.png
+   
       - lib/assets/google.svg
       - lib/assets/facebook.svg
       - lib/assets/github.svg
