@@ -1,6 +1,8 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:flutter/material.dart';
-import 'package:login_ui/HomePage.dart';
 import 'package:login_ui/SignUpPage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Login_Page extends StatefulWidget {
   const Login_Page({super.key});
@@ -10,17 +12,44 @@ class Login_Page extends StatefulWidget {
 }
 
 class _Login_PageState extends State<Login_Page> {
-  Color C = Colors.white;
-  Color T = Colors.black;
+  Color backGround_colour = Colors.white; // background colour
+  Color text_colour = Colors.black;
   Icon I = Icon(Icons.sunny);
-  String lemonpie = 'lib/assets/lemonPieNew.png';
+  String lemonpie = 'lib/assets/lemonPieNew.png'; // initial picture
+
+  // text controlllers
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  Future signIn() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text.trim(),
+        password: _passwordController.text.trim(),
+      );
+      // Navigate to the home screen after successful login
+    } on FirebaseAuthException catch (e) {
+      print("Error: ${e.message}");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.message ?? "Login Failed")),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: AnimatedContainer(
           duration: Duration(seconds: 1), // Smooth transition
-          color: C,
+          color: backGround_colour,
           child: SizedBox(
             width: double.infinity,
             child: SingleChildScrollView(
@@ -39,13 +68,13 @@ class _Login_PageState extends State<Login_Page> {
                         Text(
                           'Welcome To LemonPie',
                           style: TextStyle(
-                              color: T,
+                              color: text_colour,
                               fontSize: 30,
                               fontWeight: FontWeight.bold),
                         ),
                         Text(
                           'Keep your data Safe',
-                          style: TextStyle(color: T),
+                          style: TextStyle(color: text_colour),
                         ),
                         SizedBox(
                           height: 10,
@@ -53,18 +82,20 @@ class _Login_PageState extends State<Login_Page> {
                         TextButton.icon(
                             onPressed: () {
                               setState(() {
-                                if (C == Colors.black) {
+                                if (backGround_colour == Colors.black) {
                                   lemonpie = 'lib/assets/lemonPieNew.png';
-                                  C = Colors.white;
-                                  T = Colors.black;
+                                  backGround_colour = Colors.white;
+                                  text_colour = Colors.black;
+                                  I = Icon(Icons.dark_mode);
                                 } else {
-                                  C = Colors.black;
-                                  T = Colors.white;
+                                  backGround_colour = Colors.black;
+                                  text_colour = Colors.white;
                                   lemonpie = 'lib/assets/darkmodelemonPie.png';
+                                  I = Icon(Icons.sunny);
                                 }
                               });
                             },
-                            label: Icon(Icons.sunny)),
+                            label: I),
                         SizedBox(
                           height: 200,
                         ),
@@ -79,6 +110,7 @@ class _Login_PageState extends State<Login_Page> {
                                       const Color.fromARGB(255, 243, 228, 188),
                                   borderRadius: BorderRadius.circular(30)),
                               child: TextField(
+                                controller: _emailController,
                                 decoration: InputDecoration(
                                     label: Text(
                                       'Email',
@@ -101,6 +133,7 @@ class _Login_PageState extends State<Login_Page> {
                                       const Color.fromARGB(255, 243, 228, 188),
                                   borderRadius: BorderRadius.circular(30)),
                               child: TextField(
+                                controller: _passwordController,
                                 obscureText: true,
                                 decoration: InputDecoration(
                                     label: Text(
@@ -123,18 +156,13 @@ class _Login_PageState extends State<Login_Page> {
                                   color: Colors.amber[600],
                                   borderRadius: BorderRadius.circular(30)),
                               child: TextButton.icon(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => Home_Page()));
-                                  },
+                                  onPressed: signIn,
                                   label: Text(
                                     'Login',
                                     style: TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
-                                        color: T),
+                                        color: text_colour),
                                   )),
                             ),
                             SizedBox(
@@ -159,7 +187,7 @@ class _Login_PageState extends State<Login_Page> {
                               children: [
                                 Text(
                                   'Dont Have an account?',
-                                  style: TextStyle(color: T),
+                                  style: TextStyle(color: text_colour),
                                 ),
                                 TextButton.icon(
                                     onPressed: () {
