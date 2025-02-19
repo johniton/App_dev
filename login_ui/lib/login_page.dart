@@ -1,11 +1,11 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:login_ui/SignUpPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Login_Page extends StatefulWidget {
-  const Login_Page({super.key});
+  final VoidCallback showSignupPage;
+  const Login_Page({super.key, required this.showSignupPage});
 
   @override
   State<Login_Page> createState() => _Login_PageState();
@@ -190,12 +190,7 @@ class _Login_PageState extends State<Login_Page> {
                                   style: TextStyle(color: text_colour),
                                 ),
                                 TextButton.icon(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => SignUp()));
-                                    },
+                                    onPressed: widget.showSignupPage,
                                     label: Text(
                                       'SignUp',
                                       style: TextStyle(
