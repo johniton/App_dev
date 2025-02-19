@@ -101,6 +101,7 @@ class FlutterMain extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(onPressed: () {}),
     );
   }
 }
