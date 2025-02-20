@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "184964985859",
+    "project_id": "crud-32297",
+    "storage_bucket": "crud-32297.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:184964985859:android:ec8af1c91e0530b97f4a36",
+        "android_client_info": {
+          "package_name": "com.example.notes_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBt_Y5JFjmzPrTm55CARiem9ixXGtx3oEw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
