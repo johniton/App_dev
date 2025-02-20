@@ -58,8 +58,13 @@ class _HomePageState extends State<HomePage> {
       body: StreamBuilder(
         stream: firestoreService.getNotesStream(),
         builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            return const Center(child: Text('No Notes'));
+          }
           // If we have data get all the docs
-          if (snapshot.hasData) {
+          else {
             List notesList = snapshot.data!.docs;
 
             // display as a list
@@ -78,18 +83,25 @@ class _HomePageState extends State<HomePage> {
                 // Display as list tile
                 return ListTile(
                   title: Text(noteText),
-                  trailing: IconButton(
-                    onPressed: () => openNoteBox(docID: docID),
-                    icon: Icon(Icons.edit),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+
+                    children: [
+                      IconButton(
+                        onPressed: () => openNoteBox(docID: docID),
+                        icon: Icon(Icons.edit),
+                      ),
+                      IconButton(
+                        onPressed: () => firestoreService.deleteNote(docID),
+                        icon: Icon(Icons.delete),
+                      ),
+                    ],
                   ),
                 );
               },
             );
           }
           // if no data return no nodes
-          else {
-            return const Text('NO Notes');
-          }
         },
       ),
     );
